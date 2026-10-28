@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Alexander Linton | The Wandering of Umbra</title>
+<meta name="description" content="The Wandering of Umbra and A Song for Nightfall, by novelist and comic creator Alexander Linton.">
+<meta property="og:title" content="A homepage for Alexander Linton, made by Sparsh Saini">
+<meta property="og:description" content="A homepage idea for Alexander Linton and The Wandering of Umbra, made by Sparsh Saini. Not the official site.">
+<meta property="og:image" content="https://sparshsainied-prog.github.io/alexanderlinton/img/og.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230f1e17'/><ellipse cx='12' cy='15' rx='2.4' ry='3.4' fill='%23c9f0b0'/><ellipse cx='20' cy='14' rx='2.4' ry='3.4' fill='%23c9f0b0'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/plate.jpg" fetchpriority="high">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+/* Colours are lifted from the Wandering of Umbra cover: the deep island green, the moss, the
+   pale sea mist, the teal water, the cream of the brushed title, the olive of the name. */
+:root {
+  --deep: #0e1c15;
+  --deep-2: #16291f;
+  --moss: #2f5b3e;
+  --mist: #d3e4cd;
+  --sea: #5fb3a7;
+  --cream: #f1edc8;
+  --olive: #a39f6c;
+  --eye: #c9f0b0;
+  --display: "Amatic SC", "Arial Narrow", sans-serif;
+  --text: "EB Garamond", Garamond, Georgia, serif;
+  --gutter: clamp(1rem, 5vw, 4rem);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--deep); color: var(--mist); font-family: var(--text); font-size: 1.22rem; line-height: 1.58; overflow-x: hidden; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+.wrap { max-width: 68rem; margin: 0 auto; padding: 0 var(--gutter); }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; margin: 0; line-height: .95; letter-spacing: .02em; color: var(--cream); }
+p { margin: 0 0 1rem; }
+:focus-visible { outline: 2px solid var(--eye); outline-offset: 3px; }
+
+/* Buttons: brushed caps on a mist panel, like the title on the cover */
+.btn { display: inline-block; padding: .25rem 1.1rem .3rem; background: var(--cream); color: var(--deep); font-family: var(--display); font-weight: 700; font-size: 1.7rem; line-height: 1.1; text-decoration: none; letter-spacing: .04em; border-radius: 2px 6px 3px 7px; }
+.btn:hover, .btn:focus-visible { background: var(--eye); }
+.btn.line { background: transparent; color: var(--cream); box-shadow: inset 0 0 0 1.5px var(--olive); }
+.btn.line:hover, .btn.line:focus-visible { background: rgba(201, 240, 176, .14); }
+.btns { display: flex; flex-wrap: wrap; gap: .7rem 1rem; align-items: center; }
+.quiet { text-underline-offset: .25em; text-decoration-thickness: 1px; }
+.quiet:hover, .quiet:focus-visible { color: var(--eye); }
+
+/* Who made this, before anything else */
+.top { position: absolute; z-index: 20; top: 0; left: 0; right: 0; }
+.made { margin: 0; padding: .45rem var(--gutter); background: #08110c; color: var(--mist); font-size: 1rem; line-height: 1.35; text-align: center; }
+.name { display: inline-block; padding: .6rem var(--gutter); font-family: var(--text); font-size: 1.2rem; letter-spacing: .2em; color: var(--cream); text-decoration: none; text-shadow: 0 1px 12px rgba(8, 17, 12, .8); }
+
+/* Hero: the cover's island, cut into planes. We start low by the boat; scroll and the fog
+   rolls in across the water, the camera climbs into the cloud, and the thing in the fog opens
+   its eyes. Transform and opacity only, from one scroll handler. */
+.hero { position: relative; height: 100svh; min-height: 38rem; }
+.js .hero { height: 400svh; }
+.js.still .hero { height: 100svh; }
+.stage { position: sticky; top: 0; height: 100svh; min-height: 38rem; overflow: hidden; background: var(--deep); }
+.layer { position: absolute; left: 0; top: 0; width: 1462px; height: 1500px; transform-origin: 0 0; will-change: transform; }
+.layer > img { position: absolute; }
+.plate img { left: 0; top: 0; width: 100%; height: 100%; }
+.eyes { will-change: transform, opacity; opacity: 0; }
+.eyes img { left: 41.52%; top: 17.47%; width: 16.42%; height: 13.33%; }
+.grass img { left: 0; top: 90%; width: 100%; height: 10%; }
+.fog { position: absolute; left: -20%; width: 140%; height: auto; pointer-events: none; will-change: transform, opacity; opacity: 0; }
+.fog.a { bottom: -8%; }
+.fog.b { top: 8%; }
+.scrim { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(14, 28, 21, .92) 0%, rgba(14, 28, 21, .78) 42%, rgba(14, 28, 21, .25) 75%, rgba(14, 28, 21, .1)); opacity: 0; will-change: opacity; }
+
+.say { position: absolute; left: var(--gutter); right: var(--gutter); margin: 0; max-width: 30rem; font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 6vw, 4.2rem); line-height: .98; color: var(--cream); text-shadow: 0 2px 18px rgba(8, 17, 12, .85), 0 0 3px rgba(8, 17, 12, .6); will-change: transform, opacity; }
+.say.one { top: 22svh; }
+.say.two { bottom: 12svh; opacity: 0; }
+.say small { display: block; margin-top: .6rem; font-family: var(--text); font-weight: 400; font-size: 1.05rem; letter-spacing: .02em; color: var(--mist); }
+
+.end { position: absolute; inset: 6.5rem var(--gutter) 2.5rem; display: grid; grid-template-columns: minmax(0, 30rem) auto; justify-content: center; align-items: center; gap: clamp(2rem, 5vw, 4rem); }
+.end .cv { height: min(64svh, 34rem); width: auto; aspect-ratio: 1462 / 2200; box-shadow: 0 1.6rem 3.4rem rgba(0, 0, 0, .6); will-change: transform, opacity; }
+.end .copy { will-change: transform, opacity; }
+.js .end .cv, .js .end .copy { opacity: 0; }
+.end h1 { font-size: clamp(3.6rem, 8vw, 7.4rem); margin-bottom: .6rem; }
+.end h1 span { display: block; font-size: .5em; }
+.end .tag { font-size: 1.3rem; font-style: italic; margin-bottom: 1.5rem; }
+html:not(.js) .say { display: none; }
+html:not(.js) .scrim { opacity: 1; }
+
+/* After the hero, a plain bar that stays with you */
+.after { position: sticky; top: 0; z-index: 15; background: rgba(14, 28, 21, .96); border-bottom: 1px solid rgba(163, 159, 108, .35); }
+.after .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-top: .45rem; padding-bottom: .45rem; }
+.after b { font-weight: 400; letter-spacing: .2em; font-size: 1rem; color: var(--cream); }
+.after nav { display: flex; gap: 1.3rem; font-family: var(--display); font-weight: 700; font-size: 1.6rem; line-height: 1; }
+.after nav a { text-decoration: none; }
+.after nav a:hover, .after nav a:focus-visible { color: var(--eye); }
+
+.band { padding: clamp(4.5rem, 10vw, 8rem) 0; }
+h2 { font-size: clamp(3.2rem, 7vw, 5.4rem); margin-bottom: 1.4rem; }
+.book .grid { display: grid; grid-template-columns: minmax(0, 17rem) minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+.book .grid img { box-shadow: 0 1.4rem 3rem rgba(0, 0, 0, .5); }
+.blurb { max-width: 38rem; }
+.blurb .hook { font-family: var(--display); font-weight: 700; font-size: clamp(2rem, 3.6vw, 2.8rem); line-height: 1.05; color: var(--cream); margin-bottom: 1.2rem; }
+.blurb .when { color: var(--olive); font-style: italic; margin-bottom: 1.6rem; }
+.wave { margin: 2.6rem 0 0; padding: 1.6rem 0 0; border-top: 1px solid rgba(163, 159, 108, .35); display: grid; grid-template-columns: minmax(0, 7.5rem) minmax(0, 1fr); gap: 1.4rem; align-items: start; }
+.wave blockquote { margin: 0; font-style: italic; font-size: 1.3rem; line-height: 1.45; }
+.wave cite { display: block; margin-top: .6rem; font-style: normal; font-size: 1rem; color: var(--olive); }
+.night { background: #1b1630; color: #e9e3f2; }
+.night h2 { color: #fff7e6; }
+.night .blurb .hook { color: #ffd98a; font-size: clamp(1.5rem, 2.4vw, 1.9rem); font-family: var(--text); font-style: italic; font-weight: 400; line-height: 1.4; }
+.night .btn { background: #fff7e6; color: #1b1630; }
+.night .btn.line { background: transparent; color: #fff7e6; box-shadow: inset 0 0 0 1.5px #a99bc9; }
+
+.yalc { background: var(--mist); color: var(--deep); }
+.yalc h2 { color: var(--deep); }
+.yalc .grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+.yalc .big { font-size: clamp(1.4rem, 2.4vw, 1.8rem); line-height: 1.4; }
+.yalc .table { font-family: var(--display); font-weight: 700; font-size: clamp(4rem, 9vw, 7rem); line-height: .9; color: var(--moss); }
+.yalc .table span { display: block; font-family: var(--text); font-weight: 400; font-size: 1.1rem; color: var(--deep); letter-spacing: .02em; }
+.yalc .who { margin-top: 1.6rem; font-style: italic; }
+.yalc .btn { background: var(--deep); color: var(--cream); }
+.yalc .btn.line { background: transparent; color: var(--deep); box-shadow: inset 0 0 0 1.5px var(--moss); }
+
+footer { padding: 2.2rem 0 2.6rem; background: #08110c; color: var(--mist); font-size: 1rem; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: .8rem 2rem; justify-content: space-between; }
+footer p { margin: 0; }
+
+@media (max-width: 760px) {
+  body { font-size: 1.12rem; }
+  .say.one { top: 18svh; }
+  .scrim { background: linear-gradient(180deg, rgba(14, 28, 21, .55), rgba(14, 28, 21, .9) 45%, rgba(14, 28, 21, .95)); }
+  .end { inset: 5.6rem 1.2rem 1.4rem; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto; justify-items: center; align-content: center; gap: 1rem; text-align: center; }
+  .end .cv { order: -1; height: min(36svh, 19rem); }
+  .end h1 { font-size: 3.2rem; margin-bottom: .2rem; }
+  .end .tag { font-size: 1.08rem; margin-bottom: .9rem; }
+  .end .btns { justify-content: center; }
+  .after nav { gap: .9rem; font-size: 1.45rem; }
+  .after b { font-size: .85rem; letter-spacing: .14em; }
+  .book .grid, .yalc .grid { grid-template-columns: minmax(0, 1fr); }
+  .book .grid > img { max-width: 13rem; }
+}
+</style>
+</head>
+<body>
+<div class="top">
+  <p class="made">A homepage idea made by Sparsh Saini for Alexander Linton. Not their official site.</p>
+  <a class="name" href="#">ALEXANDER LINTON</a>
+</div>
+
+<main>
+<section class="hero" aria-label="The Wandering of Umbra">
+  <div class="stage">
+    <div class="layer plate"><img src="img/plate.jpg" alt="A fisherman poles a small boat across a misty island lake, a huge shadow rising out of the cloud above him" width="1462" height="1500" fetchpriority="high"></div>
+    <img class="fog a" src="img/fog-a.png" alt="" width="1600" height="700">
+    <div class="layer eyes" aria-hidden="true"><img src="img/eyes.png" alt="" width="240" height="200"></div>
+    <img class="fog b" src="img/fog-b.png" alt="" width="1600" height="600">
+    <div class="layer grass" aria-hidden="true"><img src="img/grass.png" alt="" width="1200" height="123"></div>
+    <div class="scrim"></div>
+
+    <p class="say one">A storm. A shadow in the rain. A death.</p>
+    <p class="say two">When the fog arrived, everything changed.</p>
+
+    <div class="end">
+      <div class="copy">
+        <h1><span>The Wandering of</span> Umbra</h1>
+        <p class="tag">A chilling story of survival, fading faith, and the quiet terror of the unknown.</p>
+        <div class="btns">
+          <a class="btn" href="https://www.amazon.co.uk/dp/B0FTK3P1N2">Read it</a>
+          <a class="btn line" href="#umbra">The story</a>
+        </div>
+      </div>
+      <img class="cv" src="img/umbra.jpg" alt="The Wandering of Umbra by Alexander Linton" width="700" height="1053">
+    </div>
+  </div>
+</section>
+
+<div class="after">
+  <div class="wrap">
+    <b>ALEXANDER LINTON</b>
+    <nav aria-label="Main">
+      <a href="#umbra">Umbra</a>
+      <a href="#nightfall">Nightfall</a>
+      <a href="#yalc">YALC</a>
+    </nav>
+  </div>
+</div>
+
+<section class="band book" id="umbra">
+  <div class="wrap grid">
+    <img src="img/umbra.jpg" alt="The Wandering of Umbra cover: a fisherman on a misty lake below a shadow with green eyes" width="700" height="1053" loading="lazy">
+    <div class="blurb">
+      <h2>The Wandering of Umbra</h2>
+      <p class="hook">A storm. A shadow in the rain. A death. When the fog arrived, everything changed.</p>
+      <p>On a remote island ravaged by famine, the old cling to beliefs they've come to resent, while the young bear the weight of vanishing futures.</p>
+      <p>All live in fear of what lurks in the fog.</p>
+      <p class="when">Out now, November 2025. 280 pages.</p>
+      <div class="btns">
+        <a class="btn" href="https://www.amazon.co.uk/dp/B0FTK3P1N2">Kindle</a>
+        <a class="btn line" href="https://www.goodreads.com/book/show/242317184-the-wandering-of-umbra">Goodreads</a>
+      </div>
+      <div class="wave">
+        <img src="img/umbra-part-one.jpg" alt="The Wandering of Umbra, Part One: a pale cover of fog with one green eye" width="480" height="720" loading="lazy">
+        <blockquote>
+          <p>"Perhaps we are just another wave, already kissing the sand..."</p>
+          <cite>The Wandering of Umbra, Part One, December 2024. <a class="quiet" href="https://www.amazon.co.uk/dp/B0DG513WL5">Paperback</a></cite>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band book night" id="nightfall">
+  <div class="wrap grid">
+    <img src="img/nightfall.jpg" alt="A Song for Nightfall cover: a white rabbit among glowing wildflowers at dusk" width="560" height="906" loading="lazy">
+    <div class="blurb">
+      <h2>A Song for Nightfall</h2>
+      <p class="hook">"...lest you discover the forbidden to be rarely so without reason..."</p>
+      <p>On the border of the Ameyalli forest resides an ancient tribe. Lia and Kai are siblings who dream of entering the forbidden forest during the allure of nightfall. Night after night, they gaze longingly at the dancing lights above it and the warm glow of purple coming from within.</p>
+      <p>When Lia finally breaks away from the village's heavy hand and enters the forest, her dream is fulfilled. But at great cost.</p>
+      <div class="btns">
+        <a class="btn" href="https://www.amazon.co.uk/dp/B0BWHC1GMX">Kindle</a>
+        <a class="btn line" href="https://www.goodreads.com/book/show/122940018-a-song-for-nightfall">Goodreads</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band yalc" id="yalc">
+  <div class="wrap grid">
+    <div>
+      <h2>Come out of the fog at YALC</h2>
+      <p class="big">I'll be at YALC London on 31 October and 1 November 2026, with the Indie Rebels.</p>
+      <p class="who">Novelist and comic creator. Come and say hello, and ask me about Umbra.</p>
+      <div class="btns">
+        <a class="btn" href="https://www.instagram.com/re_alexanderlinton/">Instagram</a>
+        <a class="btn line" href="https://www.goodreads.com/search?q=Alexander+Linton">Goodreads</a>
+      </div>
+    </div>
+    <p class="table">45 and 46<span>Indie Rebels tables</span></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>A mockup made by Sparsh Saini for Alexander Linton. Not affiliated, not live. The covers and words are the author's.</p>
+    <p><a class="quiet" href="#">Back to top</a></p>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const hero = document.querySelector('.hero'), stage = hero.querySelector('.stage');
+  const plate = hero.querySelector('.plate'), eyes = hero.querySelector('.eyes'), grass = hero.querySelector('.grass');
+  const fogA = hero.querySelector('.fog.a'), fogB = hero.querySelector('.fog.b'), scrim = hero.querySelector('.scrim');
+  const one = hero.querySelector('.say.one'), two = hero.querySelector('.say.two');
+  const cv = hero.querySelector('.end .cv'), copy = hero.querySelector('.end .copy');
+  const AW = 1462, AH = 1500;
+  const clamp = v => Math.min(1, Math.max(0, v));
+  const ease = t => t * t * (3 - 2 * t);
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // camera keys: [progress, focus x, focus y (art pixels), zoom, where the focus sits on screen (x, y fractions)]
+  const KEYS = [[0, 520, 1250, 1.35, .5, .62], [.55, 727, 362, 1.22, .5, .4], [.88, 731, 760, 1, .5, .5], [1, 731, 760, 1, .5, .5]];
+  const cam = p => {
+    let i = 1; while (i < KEYS.length - 1 && p > KEYS[i][0]) i++;
+    const a = KEYS[i - 1], b = KEYS[i], t = ease(clamp((p - a[0]) / (b[0] - a[0])));
+    return a.slice(1).map((v, j) => lerp(v, b[j + 1], t));
+  };
+  const place = (el, X, Y, S, sx, sy, W, H) => {
+    let tx = sx - X * S, ty = sy - Y * S;
+    tx = Math.min(0, Math.max(W - AW * S, tx)); ty = Math.min(0, Math.max(H - AH * S, ty));
+    el.style.transform = `translate(${tx.toFixed(1)}px,${ty.toFixed(1)}px) scale(${S.toFixed(4)})`;
+    return [tx, ty];
+  };
+  let G = null;
+  const render = p => {
+    if (!G) G = { W: stage.clientWidth, H: stage.clientHeight };
+    const { W, H } = G, s0 = Math.max(W / AW, H / AH);
+    const [X, Y, k, fx, fy] = cam(p);
+    const S = s0 * k;
+    place(plate, X, Y, S, W * fx, H * fy, W, H);
+    place(eyes, X, Y, S, W * fx, H * fy, W, H);
+    // the grass is nearest: it is a touch bigger and drops away faster as the camera climbs
+    const climb = ease(clamp((p - .02) / .53));
+    const [gx, gy] = place(grass, X, Y, S * 1.06, W * fx, H * fy, W, H);
+    grass.style.transform = `translate(${gx.toFixed(1)}px,${(gy + H * .22 * climb).toFixed(1)}px) scale(${(S * 1.06).toFixed(4)})`;
+    // the fog rolls in from both sides, thickest as the eyes open, then thins
+    const fin = ease(clamp((p - .06) / .4)), fout = ease(clamp((p - .62) / .25));
+    fogA.style.transform = `translate3d(${lerp(-32, 4, fin).toFixed(2)}%,${lerp(10, -6, climb).toFixed(2)}%,0)`;
+    fogA.style.opacity = (fin * (1 - .55 * fout)).toFixed(3);
+    const fbin = ease(clamp((p - .16) / .4));
+    fogB.style.transform = `translate3d(${lerp(30, -6, fbin).toFixed(2)}%,${lerp(-4, 8, climb).toFixed(2)}%,0)`;
+    fogB.style.opacity = (fbin * .85 * (1 - .6 * fout)).toFixed(3);
+    // it opens its eyes
+    const e = ease(clamp((p - .44) / .1));
+    eyes.style.opacity = e.toFixed(3);
+    const o = ease(clamp((p - .04) / .1));
+    one.style.opacity = (1 - o).toFixed(3); one.style.transform = `translateY(${(-o * 2.5).toFixed(2)}rem)`;
+    const t2 = ease(clamp((p - .24) / .08)) * (1 - ease(clamp((p - .52) / .08)));
+    two.style.opacity = t2.toFixed(3); two.style.transform = `translateY(${((1 - t2) * 1.2).toFixed(2)}rem)`;
+    scrim.style.opacity = ease(clamp((p - .7) / .16)).toFixed(3);
+    const c = ease(clamp((p - .76) / .16));
+    copy.style.opacity = c.toFixed(3); copy.style.transform = `translateY(${((1 - c) * 1.4).toFixed(2)}rem)`;
+    cv.style.opacity = c.toFixed(3); cv.style.transform = `translateY(${((1 - c) * 2.4).toFixed(2)}rem) scale(${(1.04 - .04 * c).toFixed(4)})`;
+  };
+  const prog = () => { const run = hero.offsetHeight - innerHeight; return run > 0 ? clamp(-hero.getBoundingClientRect().top / run) : 1; };
+  addEventListener('resize', () => { G = null; render(reduced ? 1 : prog()); });
+  if (reduced) { document.documentElement.classList.add('still'); render(1); return; }
+  let ticking = false;
+  const update = () => { ticking = false; const p = prog(); hero.style.setProperty('--p', p.toFixed(4)); render(p); };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  update();
+})();
+</script>
+</body>
+</html>
